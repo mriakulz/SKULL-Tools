@@ -4,6 +4,7 @@ import time
 import os
 import pinglink
 import pinguserip
+import phoneinfo
 import username
 
 MENU_FILE = "menu.txt"
@@ -34,7 +35,7 @@ MENU_1 = f""" ┌─ {option_info}                                              
  └─┬─────────┤ Network Scanner ├─────────┬──────────────┤ Osint ├──────────────┬────────────┤ Utilities ├────────────┴─
    │         └─────────────────┘         │              └───────┘              │            └───────────┘
    ├─ 1 Target Link                      ├─ 7 Username Tracker                 ├─
-   ├─ 2 Target IP                        ├─                                    ├─
+   ├─ 2 Target IP                        ├─ 8 Phone Info                       ├─
    ├─ 3                                  ├─                                    ├─
    ├─ 4                                  ├─                                    ├─
    ├─ 5                                  ├─                                    ├─
@@ -71,7 +72,7 @@ def clear_screen():
 def menu_tool_info():
     print("""
 [+] Name Tool     : SKULL
-[+] Version       : 1.0
+[+] Version       : 1.1
 [+] Coding        : Python 3
 [+] Language      : EN
 [+] Creator       : Mriakulz
@@ -101,6 +102,8 @@ def main():
             pinguserip.pinguserip()
         if choice == "7":
             username.username()
+        if choice == "8":
+            phoneinfo.phoneinfomenu()
 
         if choice == "n" or choice == "N":
             save_menu("2")

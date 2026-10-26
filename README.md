@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| **Version** | 1.0 |
+| **Version** | 1.1 |
 | **Interface language** | English |
 | **Written in** | Python 3 |
 | **Platforms** | Windows 10/11, Linux (see [Known limitations](#known-limitations)) |
@@ -39,7 +39,17 @@ The program has a paged menu with three sections: **Network Scanner**, **Osint**
 
 **`7` — Username Tracker.** Checks whether a username exists on **41 websites** (GitHub, Reddit, Instagram, Telegram, Steam, TikTok, Twitch, Chess.com, Habr and more). Only found profiles (HTTP 200) are printed, with links; if a site can't be reached, `[!] <site>: ERROR` is shown.
 
-> The remaining menu slots (3–6 and the whole second page) are reserved for future tools.
+**`8` — Phone Info.** Analyzes a phone number entered in international format (with `+`, e.g. `+380671234567`). Works offline, using the built-in prefix database of the `phonenumbers` library:
+
+- number validation;
+- international and national formats;
+- country;
+- region (available for landline numbers only);
+- carrier;
+- number type (mobile, landline, VoIP, toll-free);
+- time zone.
+
+> The remaining menu slots (3–6, 9+ and the whole second page) are reserved for future tools.
 
 ---
 
@@ -48,7 +58,7 @@ The program has a paged menu with three sections: **Network Scanner**, **Osint**
 ```bash
 git clone -b SKULL https://github.com/mriakulz/SKULL-Tools.git
 cd SKULL-Tools
-pip install colorama tqdm requests
+pip install colorama tqdm requests phonenumbers
 ```
 
 ### Dependencies
@@ -58,8 +68,9 @@ pip install colorama tqdm requests
 | `colorama` | colored terminal output |
 | `tqdm` | progress bar on exit |
 | `requests` | HTTP requests (geolocation, username checks) |
+| `phonenumbers` | phone number parsing and info (tool 8) |
 
-**Python 3** and an Internet connection are required. The `socket`, `ssl` and `subprocess` modules are part of the standard library.
+**Python 3** and an Internet connection are required (except for Phone Info, which works offline). The `socket`, `ssl` and `subprocess` modules are part of the standard library.
 
 ---
 
@@ -77,7 +88,7 @@ python main.py
 
 | Key | Action |
 |---|---|
-| `1`, `2`, `7` | run the corresponding tool |
+| `1`, `2`, `7`, `8` | run the corresponding tool |
 | `N` | next menu page |
 | `B` | back to the previous menu page |
 | `I` | program info |
@@ -95,6 +106,7 @@ SKULL-Tools/
 ├── pinglink.py     # tool 1: Target Link
 ├── pinguserip.py   # tool 2: Target IP
 ├── username.py     # tool 7: Username Tracker
+├── phoneinfo.py    # tool 8: Phone Info
 ├── menu.txt        # current menu page number
 └── LICENSE         # MIT
 ```
@@ -106,6 +118,7 @@ SKULL-Tools/
 - **Ping works on Windows only.** The code uses the `-n 2` flag; on Linux/macOS it should be `-c 2`, so the "Ping" section shows no result there. Everything else works on all platforms.
 - **IP geolocation** comes from the free [ip-api.com](https://ip-api.com) service over HTTP, which is rate-limited; accuracy depends on the service and is often approximate.
 - **Username Tracker** treats a profile as found when the response code is 200. Some sites (Instagram, Facebook, LinkedIn, TikTok, etc.) may block requests or return 200 for non-existent pages, so false positives and misses are possible. Verify results manually.
+- **Phone Info** is based on number prefixes only. Mobile numbers are not tied to a region, so only the country is shown for them. The carrier is the one the number was originally issued by, so it can be outdated if the owner switched operators (number portability). The tool cannot identify the owner or the current location of a number.
 
 ---
 
