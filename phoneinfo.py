@@ -1,6 +1,7 @@
 import phonenumbers
 from phonenumbers import geocoder, carrier, timezone, number_type, PhoneNumberType
 from phonenumbers import PhoneNumberFormat as F
+from ddgs import DDGS
 
 TYPES = {
     PhoneNumberType.MOBILE: "Mobile",
@@ -9,6 +10,25 @@ TYPES = {
     PhoneNumberType.VOIP: "VoIP",
     PhoneNumberType.TOLL_FREE: "Toll-free",
 }
+
+def search_in_duckduckgo(phone_str):
+    exact_query = f'"{phone_str}"'
+    print(f"\nLaunching global search in DuckDuckGo for: {exact_query}...")
+    try:
+        ddgs = DDGS()
+        results = ddgs.text(exact_query, max_results=10)
+
+        found_any = False
+        for index, r in enumerate(results, 1):
+            found_any = True
+            print(f"{index}. {r['title']}")
+            print(f"Link: {r['href']}\n")
+
+        if not found_any:
+            print("No results found. The number might not be indexed or the network is blocked.")
+
+    except Exception as e:
+        print(f"An error occurred while searching in DDGS: {e}")
 
 def phoneinfomenu():
     raw = input("Enter phone number (with +): ").strip()
@@ -19,10 +39,12 @@ def phoneinfomenu():
             print("\nInvalid number")
         else:
             country = geocoder.country_name_for_number(num, "en")
-            region = geocoder.description_for_number(num, "uk")
+            region = geocoder.description_for_number(num, "en")
+
+            intl_format = phonenumbers.format_number(num, F.INTERNATIONAL)
 
             print()
-            print("International:", phonenumbers.format_number(num, F.INTERNATIONAL))
+            print("International:", intl_format)
             print("National:", phonenumbers.format_number(num, F.NATIONAL))
             print("Country:", geocoder.description_for_number(num, "en") or "Unknown")
 
@@ -34,6 +56,8 @@ def phoneinfomenu():
             print("Carrier:", carrier.name_for_number(num, "en") or "Unknown")
             print("Type:", TYPES.get(number_type(num), "Unknown"))
             print("Time zone:", ", ".join(timezone.time_zones_for_number(num)))
+
+            search_in_duckduckgo(intl_format)
 
     except phonenumbers.NumberParseException:
         print("\nWrong format. Use +380...")
