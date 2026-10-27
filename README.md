@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| **Version** | 1.1 |
+| **Version** | 1.11 |
 | **Interface language** | English |
 | **Written in** | Python 3 |
 | **Platforms** | Windows 10/11, Linux (see [Known limitations](#known-limitations)) |
@@ -48,6 +48,13 @@ The program has a paged menu with three sections: **Network Scanner**, **Osint**
 - carrier;
 - number type (mobile, landline, VoIP, toll-free);
 - time zone.
+
+**New Features:**
+- **Global OSINT Web Lookup:** Automatically scans the internet using Google Custom Search API to find any public leaks, listings, or websites where the number is exposed (checks both international and clean national formats simultaneously).
+- **US/Canada Toll-Free Country Fix:** Resolves a bug to correctly identify and output country names for North American toll-free ranges.
+- **Fully Localized English Interface:** Complete translation of all inputs, outputs, and prompt messages into English for a clean, unified user experience.
+- **Code Optimization:** Completely stripped of comments and unnecessary diagnostic logs for improved execution speed and clean terminal formatting.
+
 
 > The remaining menu slots (3–6, 9+ and the whole second page) are reserved for future tools.
 

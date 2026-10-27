@@ -72,7 +72,7 @@ def clear_screen():
 def menu_tool_info():
     print("""
 [+] Name Tool     : SKULL
-[+] Version       : 1.1
+[+] Version       : 1.11
 [+] Coding        : Python 3
 [+] Language      : EN
 [+] Creator       : Mriakulz
