@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| **Version** | 1.11 |
+| **Version** | 1.12 |
 | **Interface language** | English |
 | **Written in** | Python 3 |
 | **Platforms** | Windows 10/11, Linux (see [Known limitations](#known-limitations)) |

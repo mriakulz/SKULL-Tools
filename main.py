@@ -72,7 +72,7 @@ def clear_screen():
 def menu_tool_info():
     print("""
 [+] Name Tool     : SKULL
-[+] Version       : 1.11
+[+] Version       : 1.12
 [+] Coding        : Python 3
 [+] Language      : EN
 [+] Creator       : Mriakulz
@@ -101,7 +101,7 @@ def main():
             import pinguserip
             pinguserip.pinguserip()
         if choice == "7":
-            username.username()
+            username.username_tracker()
         if choice == "8":
             phoneinfo.phoneinfomenu()
 
