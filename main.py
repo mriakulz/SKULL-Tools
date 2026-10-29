@@ -6,6 +6,7 @@ import pinglink
 import pinguserip
 import phoneinfo
 import username
+import webscanner
 
 MENU_FILE = "menu.txt"
 
@@ -31,19 +32,19 @@ option_info = "[I] Info"
 option_back = "[B] Back"
 
 MENU_1 = f""" ┌─ {option_info}                                                                                               {option_next} ─┐
- ├─ {option_quit} ┌─────────────────┐                        ┌───────┐                           ┌───────────┐            │
- └─┬─────────┤ Network Scanner ├─────────┬──────────────┤ Osint ├──────────────┬────────────┤ Utilities ├────────────┴─
-   │         └─────────────────┘         │              └───────┘              │            └───────────┘
-   ├─ 1 Target Link                      ├─ 7 Username Tracker                 ├─
-   ├─ 2 Target IP                        ├─ 8 Phone Info                       ├─
-   ├─ 3                                  ├─                                    ├─
-   ├─ 4                                  ├─                                    ├─
-   ├─ 5                                  ├─                                    ├─
-   └─ 6                                  ├─                                    ├─
-                                         ├─                                    └─
-                                         ├─
-                                         ├─
-                                         └─
+ ├─ {option_quit} ┌────────────┐                        ┌───────┐                           ┌───────────┐            │
+ └─┬─────────┤ Pentesting ├─────────┬──────────────┤ Osint ├──────────────┬────────────┤ Utilities ├────────────┴─
+   │         └────────────┘         │              └───────┘              │            └───────────┘
+   ├─ 1 Target Link                 ├─ 7 Username Tracker                 ├─
+   ├─ 2 Target IP                   ├─ 8 Phone Info                       ├─
+   ├─ 3 Web Scanner                 ├─                                    ├─
+   ├─ 4                             ├─                                    ├─
+   ├─ 5                             ├─                                    ├─
+   └─ 6                             ├─                                    ├─
+                                    ├─                                    └─
+                                    ├─
+                                    ├─
+                                    └─
 
 """
 
@@ -72,7 +73,7 @@ def clear_screen():
 def menu_tool_info():
     print("""
 [+] Name Tool     : SKULL
-[+] Version       : 1.12
+[+] Version       : 1.13
 [+] Coding        : Python 3
 [+] Language      : EN
 [+] Creator       : Mriakulz
@@ -98,8 +99,9 @@ def main():
         if choice == "1":
             pinglink.pinglink()
         if choice == "2":
-            import pinguserip
             pinguserip.pinguserip()
+        if choice == "3":
+            webscanner.webscanner()
         if choice == "7":
             username.username_tracker()
         if choice == "8":

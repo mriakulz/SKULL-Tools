@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| **Version** | 1.12 |
+| **Version** | 1.13 |
 | **Interface language** | English |
 | **Written in** | Python 3 |
 | **Platforms** | Windows 10/11, Linux (see [Known limitations](#known-limitations)) |
@@ -17,7 +17,7 @@
 
 The program has a paged menu with three sections: **Network Scanner**, **Osint** and **Utilities**.
 
-### Network Scanner
+### Pentesting
 
 **`1` — Target Link.** Analyzes a domain (enter it without `https://`):
 
@@ -34,6 +34,15 @@ The program has a paged menu with three sections: **Network Scanner**, **Osint**
 - network type (mobile or home/other) and a Proxy / VPN flag;
 - reverse DNS lookup;
 - ping.
+
+**`3` — Web Scanner.** Conducts an asynchronous reconnaissance and security audit of a target web resource using the `aiohttp` library. Operates dynamically depending on the detected technologies:
+
+- server and CMS detection via tech signatures;
+- security headers audit (Content-Security-Policy, HSTS, X-Frame-Options);
+- asynchronous directory fuzzing for configuration files and backups;
+- intelligent WordPress enumeration module;
+- automated user enumeration via WordPress REST API;
+- information disclosure detection (license and readme files analysis).
 
 ### Osint
 
@@ -75,6 +84,7 @@ pip install colorama tqdm requests phonenumbers
 | `colorama` | colored terminal output |
 | `tqdm` | progress bar on exit |
 | `requests` | HTTP requests (geolocation, username checks) |
+| `aiohttp` | asynchronous HTTP requests (web scanner tool 3) |
 | `phonenumbers` | phone number parsing and info (tool 8) |
 
 **Python 3** and an Internet connection are required (except for Phone Info, which works offline). The `socket`, `ssl` and `subprocess` modules are part of the standard library.
@@ -95,7 +105,7 @@ python main.py
 
 | Key | Action |
 |---|---|
-| `1`, `2`, `7`, `8` | run the corresponding tool |
+| `1`, `2`, `3`, `7`, `8` | run the corresponding tool |
 | `N` | next menu page |
 | `B` | back to the previous menu page |
 | `I` | program info |
@@ -112,6 +122,7 @@ SKULL-Tools/
 ├── main.py         # main menu and entry point
 ├── pinglink.py     # tool 1: Target Link
 ├── pinguserip.py   # tool 2: Target IP
+├── webscanner.py   # tool 3: Web Scanner  
 ├── username.py     # tool 7: Username Tracker
 ├── phoneinfo.py    # tool 8: Phone Info
 ├── menu.txt        # current menu page number
@@ -124,6 +135,7 @@ SKULL-Tools/
 
 - **Ping works on Windows only.** The code uses the `-n 2` flag; on Linux/macOS it should be `-c 2`, so the "Ping" section shows no result there. Everything else works on all platforms.
 - **IP geolocation** comes from the free [ip-api.com](https://ip-api.com) service over HTTP, which is rate-limited; accuracy depends on the service and is often approximate.
+- **Web Scanner** relies entirely on asynchronous network requests and target server responsiveness. Rate limiting or Cloudflare protection on the target host can throttle or block scanning attempts, leading to restricted access codes (403 Forbidden). The scanner might report false positives if the target server redirects all non-existent paths to a custom error page with a 200 OK status instead of returning a proper 404 Not Found code. Manual verification of discovered directories and disclosed user logs is recommended.
 - **Username Tracker** treats a profile as found when the response code is 200. Some sites (Instagram, Facebook, LinkedIn, TikTok, etc.) may block requests or return 200 for non-existent pages, so false positives and misses are possible. Verify results manually.
 - **Phone Info** is based on number prefixes only. Mobile numbers are not tied to a region, so only the country is shown for them. The carrier is the one the number was originally issued by, so it can be outdated if the owner switched operators (number portability). The tool cannot identify the owner or the current location of a number.
 
