@@ -7,6 +7,7 @@ import pinguserip
 import phoneinfo
 import username
 import webscanner
+import filemetadatascanner
 
 MENU_FILE = "menu.txt"
 
@@ -35,15 +36,12 @@ MENU_1 = f""" ┌─ {option_info}                                              
  ├─ {option_quit} ┌────────────┐                        ┌───────┐                           ┌───────────┐            │
  └─┬─────────┤ Pentesting ├─────────┬──────────────┤ Osint ├──────────────┬────────────┤ Utilities ├────────────┴─
    │         └────────────┘         │              └───────┘              │            └───────────┘
-   ├─ 1 Target Link                 ├─ 7 Username Tracker                 ├─
+   ├─ 1 Target Link                 ├─ 7 Username Tracker                 ├─ 14 File Metadata Scanner
    ├─ 2 Target IP                   ├─ 8 Phone Info                       ├─
    ├─ 3 Web Scanner                 ├─                                    ├─
    ├─ 4                             ├─                                    ├─
    ├─ 5                             ├─                                    ├─
-   └─ 6                             ├─                                    ├─
-                                    ├─                                    └─
-                                    ├─
-                                    ├─
+   └─ 6                             ├─                                    └─
                                     └─
 
 """
@@ -73,7 +71,7 @@ def clear_screen():
 def menu_tool_info():
     print("""
 [+] Name Tool     : SKULL
-[+] Version       : 1.13
+[+] Version       : 1.14
 [+] Coding        : Python 3
 [+] Language      : EN
 [+] Creator       : Mriakulz
@@ -106,6 +104,8 @@ def main():
             username.username_tracker()
         if choice == "8":
             phoneinfo.phoneinfomenu()
+        if choice == "14":
+            filemetadatascanner.metadataanalyzer()
 
         if choice == "n" or choice == "N":
             save_menu("2")
